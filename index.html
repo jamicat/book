@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jamie> Guestbook</title>
+  <style>
+    @font-face {
+      font-family: 'hack-regular';
+      src: url('hack-regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'honeybee';
+      src: url('honeybee.ttf') format('truetype');
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      background-color: beige;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 4.5em;
+      color: darkbrown;
+      font-family: 'honeybee', sans-serif; 
+    }
+
+    h1 span {
+      color: pink;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: darkbrown;
+      font-family: 'hack-regular', sans-serif; 
+      font-size: 1.8em;
+    }
+
+    .form-container {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .form-container textarea {
+      resize: none;
+    }
+
+    .species-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .species-buttons button {
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .species-buttons button:hover {
+      transform: scale(1.2);
+    }
+
+    .comments-section {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .comment {
+      background-color: black;
+      color: pink;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      font-family: 'hack-regular';
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .comment h4 {
+      margin: 0 0 5px;
+    }
+
+    .comment small {
+      display: block;
+      margin-top: 5px;
+      color: grey;
+    }
+
+    .submit-button {
+      display: block;
+      margin: 20px auto;
+      background-color: pink;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      font-family: 'hack-regular';
+    }
+
+    .home-btn {
+      display: block;
+      margin: 20px auto;
+      background-color: pink;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      font-family: 'hack-regular';
+    }
+  </style>
+</head>
+<body>
+  <h1>Guestbook<span>.</span><span>.</span><span>.</span></h1>
+
+  <div class="form-container">
+    <form id="guestbook-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" rows="4" maxlength="2000" required></textarea>
+
+      <label for="food">Favourite food:</label>
+      <input type="text" id="food" name="food" required>
+
+      <div class="species-buttons" id="species-buttons">
+        <button type="button" data-species="🐶">🐶</button>
+        <button type="button" data-species="🐱">🐱</button>
+        <button type="button" data-species="🦈">🦈</button>
+        <button type="button" data-species="🐰">🐰</button>
+        <button type="button" data-species="🦁">🦁</button>
+        <button type="button" data-species="🐉">🐉</button>
+        <button type="button" data-species="🦌">🦌</button>
+        <button type="button" data-species="🐮">🐮</button>
+        <button type="button" data-species="🦊">🦊</button>
+        <button type="button" data-species="❓">❓</button>
+      </div>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+
+  <div class="comments-section" id="comments-section"></div>
+
+  <button class="home-btn" id="home-btn" onclick="window.location.href='home.html';">Return to Home</button>
+
+  <script>
+    const form = document.getElementById('guestbook-form');
+    const commentsSection = document.getElementById('comments-section');
+    const speciesButtons = document.querySelectorAll('#species-buttons button');
+    let selectedSpecies = '';
+
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbwQKlymz_rg1bTTIxoq8X7U8LKmhDZdAKv1-jNfdMkujGImuajY8ic4wsPk5MN2Kuzjag/exec';
+
+    const cooldownPeriod = 10 * 60 * 1000;
+
+    speciesButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        selectedSpecies = button.dataset.species;
+        speciesButtons.forEach(btn => btn.style.opacity = '0.5');
+        button.style.opacity = '1';
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+      const now = Date.now();
+
+      if (lastSubmissionTime && now - lastSubmissionTime < cooldownPeriod) {
+        alert('10 minutes between each comment, please!');
+        return;
+      }
+
+      const name = document.getElementById('name').value.trim();
+      const commentText = document.getElementById('comment').value.trim();
+      const food = document.getElementById('food').value.trim();
+
+      if (!name || !commentText || !food) {
+        alert('Fields cannot be empty!');
+        return;
+      }
+
+      const data = {
+        name,
+        species: selectedSpecies || '❓',
+        comment: commentText,
+        food,
+      };
+
+      fetch(webAppUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      localStorage.setItem('lastSubmissionTime', now);
+
+      form.reset();
+      selectedSpecies = '';
+      speciesButtons.forEach(btn => btn.style.opacity = '1');
+      loadComments();
+    });
+
+    async function loadComments() {
+      try {
+        const response = await fetch(webAppUrl);
+        if (!response.ok) throw new Error('Failed to load comments.');
+
+        const comments = await response.json();
+        commentsSection.innerHTML = '';
+        comments
+          .slice()
+          .reverse() // Reverse array
+          .forEach(({ timestamp, name, species, comment, food }) => {
+            const commentEl = document.createElement('div');
+            commentEl.classList.add('comment');
+
+            const nameEl = document.createElement('h4');
+            nameEl.textContent = `${species || '❓'} ${name || 'Anonymous'}`;
+            commentEl.appendChild(nameEl);
+
+            const textEl = document.createElement('p');
+            textEl.textContent = comment || 'No comment provided.';
+            commentEl.appendChild(textEl);
+
+            const foodEl = document.createElement('p');
+            foodEl.textContent = `Favourite Food: ${food || 'unknown'}`;
+            commentEl.appendChild(foodEl);
+
+            const dateEl = document.createElement('small');
+            dateEl.textContent = timestamp ? formatDate(timestamp) : 'Invalid Date';
+            commentEl.appendChild(dateEl);
+
+            commentsSection.appendChild(commentEl);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function formatDate(timestamp) {
+      if (timestamp.includes('/')) return timestamp;
+      const date = new Date(timestamp);
+      if (isNaN(date)) return 'Invalid Date';
+      return `${date.getDate().toString().padStart(2, '0')}/${
+        (date.getMonth() + 1).toString().padStart(2, '0')
+      }/${date.getFullYear()}, ${date.toLocaleTimeString()} `;
+    }
+
+    loadComments();
+  </script>
+</body>
+</html>

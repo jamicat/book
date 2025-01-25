@@ -117,7 +117,10 @@ body {
   color: red;
 }
 
-
+input::placeholder {
+  color: grey;
+  font-style: italic;
+}
 
 
 

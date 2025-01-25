@@ -252,7 +252,7 @@
       .reverse() 
       .forEach(({ timestamp, name, species, comment }) => {
         const questionData = questions.find(q => q.name === name && q.timestamp === timestamp); 
-        const questionText = questionData ? questionData.question : 'No question asked.';
+        const questionText = questionData ? questionData.question : null;
 
         const commentEl = document.createElement('div');
         commentEl.classList.add('comment');
@@ -265,9 +265,12 @@
         textEl.textContent = comment || 'No comment provided.';
         commentEl.appendChild(textEl);
 
-        const questionEl = document.createElement('p');
-        questionEl.textContent = `Question: ${questionText}`;
-        commentEl.appendChild(questionEl);
+        
+       if (questionText && questionText !== 'No question asked.') {
+       const questionEl = document.createElement('p');
+       questionEl.textContent = `Question: ${questionText}`;
+       commentEl.appendChild(questionEl);
+       }
 
         const dateEl = document.createElement('small');
         dateEl.textContent = timestamp ? formatDate(timestamp) : 'Invalid Date';

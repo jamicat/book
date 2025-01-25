@@ -254,7 +254,7 @@
     commentTimestamp === questionTimestamp
   );
 });
-        const questionText = questionData ? questionData.question : 'Not said';
+        const questionText = questionData ? questionData.question : null;
 
         const commentEl = document.createElement('div');
         commentEl.classList.add('comment');
@@ -268,7 +268,7 @@
         commentEl.appendChild(textEl);
 
         
-       if (questionText && questionText !== 'Not said') {
+       if (questionText) {
   const questionEl = document.createElement('p');
   questionEl.textContent = `Favourite food: ${questionText}`;
   commentEl.appendChild(questionEl);

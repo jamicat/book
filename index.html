@@ -150,9 +150,9 @@
       <input type="text" id="name" name="name" required>
 
       <label for="comment">Comment:</label>
-      <textarea id="comment" name="comment" rows="4" maxlength="2000" required></textarea>
+      <textarea id="comment" name="comment" rows="4" maxlength="10000" required></textarea>
 
-      <label for="question">Ask a question:</label>
+      <label for="question">Favourite food:</label>
       <input type="text" id="question" name="question" required>
 
     
@@ -268,7 +268,7 @@
         
        if (questionText && questionText !== 'No question asked.') {
        const questionEl = document.createElement('p');
-       questionEl.textContent = `Question: ${questionText}`;
+       questionEl.textContent = `Favourite food: ${questionText}`;
        commentEl.appendChild(questionEl);
        }
 

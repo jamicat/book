@@ -253,7 +253,7 @@
       .reverse() 
       .forEach(({ timestamp, name, species, comment }) => {
         const questionData = questions.find(q => q.name === name && q.timestamp === timestamp); 
-        const questionText = questionData ? questionData.question : 'No question asked.';
+        const questionText = questionData ? questionData.question : 'Not said';
 
         const commentEl = document.createElement('div');
         commentEl.classList.add('comment');

@@ -267,9 +267,11 @@
         commentEl.appendChild(textEl);
 
         
-       const questionEl = document.createElement('p');
-        questionEl.textContent = `Favourite food: ${questionText}`;
-        commentEl.appendChild(questionEl);
+       if (questionText && questionText !== 'Not said') {
+  const questionEl = document.createElement('p');
+  questionEl.textContent = `Favourite food: ${questionText}`;
+  commentEl.appendChild(questionEl);
+}
 
         const dateEl = document.createElement('small');
         dateEl.textContent = timestamp ? formatDate(timestamp) : 'Invalid Date';

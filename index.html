@@ -152,8 +152,8 @@
       <label for="comment">Comment:</label>
       <textarea id="comment" name="comment" rows="4" maxlength="2000" required></textarea>
 
-      <label for="food">Favourite food:</label>
-      <input type="text" id="food" name="food" required>
+      <label for="question">Ask a question:</label>
+      <input type="text" id="question" name="question" required>
 
     
       <div class="species-buttons" id="species-buttons">
@@ -208,9 +208,9 @@
 
       const name = document.getElementById('name').value.trim();
       const commentText = document.getElementById('comment').value.trim();
-      const food = document.getElementById('food').value.trim();
+      const question = document.getElementById('question').value.trim();
 
-      if (!name || !commentText || !food) {
+      if (!name || !commentText || !question) {
         alert('Fields cannot be empty!');
         return;
       }
@@ -219,7 +219,7 @@
         name,
         species: selectedSpecies || '❓',
         comment: commentText,
-        food,
+        question,
       };
 
       fetch(webAppUrl, {
@@ -242,12 +242,17 @@
         const response = await fetch(webAppUrl);
         if (!response.ok) throw new Error('Failed to load comments.');
 
-        const comments = await response.json();
+        const { comments, questions } = await response.json();
+        console.log('Fetched comments and questions:', { comments, questions });
+        
         commentsSection.innerHTML = '';
         comments
           .slice()
           .reverse() // Reverse array
-          .forEach(({ timestamp, name, species, comment, food }) => {
+          .forEach(({ timestamp, name, species, comment }) => {
+            const questionData = questions.find(q => q.name === name && q.timestamp === timestamp); // Match the question by name and timestamp
+            const questionText = questionData ? questionData.question : 'No question asked.';
+            
             const commentEl = document.createElement('div');
             commentEl.classList.add('comment');
 
@@ -259,10 +264,10 @@
             textEl.textContent = comment || 'No comment provided.';
             commentEl.appendChild(textEl);
 
-            const foodEl = document.createElement('p');
-            foodEl.textContent = `Favourite Food: ${food || 'unknown'}`;
-            commentEl.appendChild(foodEl);
-
+            const questionEl = document.createElement('p');
+            questionEl.textContent = `Question: ${questionText}`;
+            commentEl.appendChild(questionEl);
+  
             const dateEl = document.createElement('small');
             dateEl.textContent = timestamp ? formatDate(timestamp) : 'Invalid Date';
             commentEl.appendChild(dateEl);

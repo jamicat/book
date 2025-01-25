@@ -203,7 +203,8 @@
 
       const name = document.getElementById('name').value.trim();
       const commentText = document.getElementById('comment').value.trim();
-      const question = document.getElementById('question').value.trim();
+      const question = document.getElementById('question').value.trim() || null;
+
 
       if (!name || !commentText) {
         alert('Name and comment cannot be empty!');

@@ -211,8 +211,8 @@
       const commentText = document.getElementById('comment').value.trim();
       const question = document.getElementById('question').value.trim();
 
-      if (!name || !commentText || !question) {
-        alert('Fields cannot be empty!');
+      if (!name || !commentText) {
+        alert('Name and comment cannot be empty!');
         return;
       }
 

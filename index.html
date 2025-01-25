@@ -252,7 +252,14 @@
       .slice() 
       .reverse() 
       .forEach(({ timestamp, name, species, comment }) => {
-        const questionData = questions.find(q => q.name === name && q.timestamp === timestamp); 
+        const questionData = questions.find(q => {
+        const commentTimestamp = new Date(timestamp).toISOString().slice(0, 19); 
+        const questionTimestamp = new Date(q.timestamp).toISOString().slice(0, 19); 
+        return (
+    q.name.trim().toLowerCase() === name.trim().toLowerCase() &&
+    commentTimestamp === questionTimestamp
+  );
+});
         const questionText = questionData ? questionData.question : 'Not said';
 
         const commentEl = document.createElement('div');

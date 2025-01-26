@@ -222,7 +222,7 @@
 
     const webAppUrl = 'https://script.google.com/macros/s/AKfycbx7bzct-SU2XZ0OgiSQhH76NGyh6oSHkngglBgWLd9-wr76G4uPvtjRw31DifL59iadtA/exec';
 
-    const cooldownPeriod = 10 * 60 * 1000;
+    const cooldownPeriod = 5 * 60 * 1000;
 
     speciesButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -235,7 +235,13 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-    
+      const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+      const now = Date.now();
+
+      if (lastSubmissionTime && now - lastSubmissionTime < cooldownPeriod) {
+        alert('5 minutes between each comment, please!');
+        return;
+      }
 
       const name = document.getElementById('name').value.trim();
       const commentText = document.getElementById('comment').value.trim();

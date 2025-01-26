@@ -120,6 +120,7 @@ body {
 input::placeholder {
   color: grey;
   font-style: italic;
+  font-size: 1.2em;
 }
 
 

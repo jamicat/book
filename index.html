@@ -308,9 +308,23 @@
         nameEl.textContent = `${species || '❓'} ${name || 'Anonymous'}`;
         commentEl.appendChild(nameEl);
 
+        
         const textEl = document.createElement('p');
-        textEl.textContent = comment || 'No comment provided.';
-        commentEl.appendChild(textEl);
+const ytRegex = /(https?:\/\/(?:www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+))/g;
+const match = comment.match(ytRegex);
+if (match) {
+  const videoId = match[0].split('v=')[1] || match[0].split('/').pop();
+  const iframe = document.createElement('iframe');
+  iframe.width = "560";
+  iframe.height = "315";
+  iframe.src = `https://www.youtube.com/embed/${videoId}`;
+  iframe.frameBorder = "0";
+  iframe.allowFullscreen = true;
+  commentEl.appendChild(iframe);
+} else {
+  textEl.textContent = comment || 'No comment provided.';
+  commentEl.appendChild(textEl);
+}
 
         
        if (questionText) {

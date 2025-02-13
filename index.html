@@ -33,6 +33,14 @@
 
     @media (max-width: 1366px) and (max-height: 768px) {
 
+
+   .species-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+	    
     body {
     display: flex;
     flex-direction: column;
@@ -89,24 +97,18 @@
       resize: none;
     }
 
-   .species-buttons {
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: center; 
-  gap: 5px; 
-  max-width: 100%;
-  margin-bottom: 15px;
-  padding: 5px; 
-}
+ .species-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
 
-.species-buttons button {
-  font-size: 1.5rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-  flex: 0 1 auto; 
-  min-width: 40px; 
-}
+    .species-buttons button {
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
 
     .species-buttons button:hover {
       flex: 1 1 auto;

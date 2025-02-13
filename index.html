@@ -334,37 +334,28 @@
 
          
 const textEl = document.createElement('p');
-const ytRegex = /(https?:\/\/(?:www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+))/g;
-
-if (ytRegex.test(comment)) {
-  
-  const videoId = comment.match(ytRegex)[0].split('v=')[1] || comment.match(ytRegex)[0].split('/').pop();
-
-  
+const ytRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/g;
+const match = comment.match(ytRegex);
+if (match) {
+  const videoId = match[0].split("v=")[1]?.split("&")[0] || match[0].split("/").pop().split("?")[0];
   const iframe = document.createElement('iframe');
-  iframe.width = "560";
+  iframe.width = "100%"; 
   iframe.height = "315";
   iframe.src = `https://www.youtube.com/embed/${videoId}`;
   iframe.frameBorder = "0";
   iframe.allowFullscreen = true;
-
-  
+  iframe.style.borderRadius = "8px"; 
   const filteredComment = comment.replace(ytRegex, "").trim();
-
-  
   if (filteredComment) {
     textEl.textContent = filteredComment;
     commentEl.appendChild(textEl);
   }
-
-
   commentEl.appendChild(iframe);
-
 } else {
- 
   textEl.textContent = comment || 'No comment provided.';
   commentEl.appendChild(textEl);
 }
+
 
 
         

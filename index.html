@@ -44,6 +44,19 @@
 	  }
     }
 
+
+ .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.header-container img {
+  height: 60px; 
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
    body {
   font-family: 'Courier New', monospace;
   margin: 0;
@@ -218,7 +231,10 @@ label {
 
   
 <body>
-  <h1>Catbook</h1>
+ <div class="header-container">
+  <img src="deer.png" alt="Deer Fursona">
+  <h1>Guest book</h1>
+</div>
 
   <div class="form-container">
     <form id="guestbook-form">

@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function switchToCatMode() {
+    isDeerMode = false;
     modeToggleButton.textContent = 'Mode: 🐈';
 
     header.style.color = '#ffe7cd';
@@ -495,6 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function switchToDeerMode() {
+
+    isDeerMode = true;
     modeToggleButton.textContent = 'Mode: 🦌';
 
     header.style.color = '#ffffff';

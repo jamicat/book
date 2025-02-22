@@ -423,6 +423,145 @@ if (match) {
   setTimeout(() => {
     loadComments();
   }, 500);
+
+
+
+
+
+	  
+	  
+
+
+const modeToggleButton = document.getElementById('mode-toggle');
+const header = document.querySelector('h1');
+const body = document.body;
+const commentBoxes = document.querySelectorAll('.comment');
+const submitButton = document.querySelector('.submit-button');
+const homeButton = document.querySelector('.home-btn');
+
+let isDeerMode = true;
+
+modeToggleButton.addEventListener('click', () => {
+  if (isDeerMode) {
+    
+    switchToCatMode();
+  } else {
+   
+    switchToDeerMode();
+  }
+  isDeerMode = !isDeerMode;
+});
+
+function switchToCatMode() {
+
+  modeToggleButton.textContent = 'Mode: 🦌';
+  
+
+  header.style.color = '#ffe7cd';
+  header.style.textShadow = `
+    -1px -1px 0 #FFB6C1CC, 
+     1px -1px 0 #FFB6C1CC, 
+    -1px 1px 0 #FFB6C1CC, 
+     1px 1px 0 #FFB6C1CC
+  `;
+  document.querySelector('h1 span').style.color = 'pink';
+  document.title = 'Catbook';
+  header.textContent = 'Catbook';
+  
+  document.querySelectorAll('label').forEach(label => label.style.color = 'brown');
+  body.style.backgroundColor = 'beige';
+
+  commentBoxes.forEach(comment => {
+    comment.style.backgroundColor = 'rgba(255, 231, 205, 1)';
+    comment.style.color = '#333';
+    comment.style.border = '1px solid rgba(255, 192, 203, 0.6)';
+  });
+
+  document.querySelectorAll('.comment small').forEach(small => {
+    small.style.color = 'grey';
+  });
+
+
+  updateButtonStyles(submitButton, '#ffb6c1', '#ff9a9e', '#e6788e', 'black');
+  updateButtonStyles(homeButton, '#ffb6c1', '#ff9a9e', '#e6788e', 'black');
+}
+
+function switchToDeerMode() {
+  modeToggleButton.textContent = 'Mode: 🐈';
+
+
+  header.style.color = '#ffffff';
+  header.style.textShadow = `
+    -2px -2px 0 #77D9D7, 
+     2px -2px 0 #77D9D7, 
+    -2px 2px 0 #77D9D7, 
+     2px 2px 0 #77D9D7
+  `;
+  document.querySelector('h1 span').style.color = '#77D9D7';
+  document.title = 'Deerbook';
+  header.textContent = 'Guestbook';
+  
+  document.querySelectorAll('label').forEach(label => label.style.color = '#225F5F');
+  body.style.backgroundColor = '#C3E6C5';
+
+  commentBoxes.forEach(comment => {
+    comment.style.backgroundColor = '#B0F0EC';
+    comment.style.color = '#225F5F';
+    comment.style.border = '2px solid #4CB6B6';
+  });
+
+  document.querySelectorAll('.comment small').forEach(small => {
+    small.style.color = '#447F7F';
+  });
+
+
+  updateButtonStyles(submitButton, '#4CB6B6', '#38A3A3', '#2D8787', 'white');
+  updateButtonStyles(homeButton, '#4CB6B6', '#38A3A3', '#2D8787', 'white');
+}
+
+
+function updateButtonStyles(button, bgColor, hoverColor, activeColor, textColor) {
+  button.style.backgroundColor = bgColor;
+  button.style.color = textColor;
+
+  button.addEventListener('mouseover', () => {
+    button.style.backgroundColor = hoverColor;
+  });
+
+  button.addEventListener('mouseout', () => {
+    button.style.backgroundColor = bgColor;
+  });
+
+  button.addEventListener('mousedown', () => {
+    button.style.backgroundColor = activeColor;
+  });
+
+  button.addEventListener('mouseup', () => {
+    button.style.backgroundColor = hoverColor;
+  });
+}
+  
   </script>
+
+
+	
+
+<button id="mode-toggle" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CB6B6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+">Mode: 🐈</button>
+
+
+
+	
 </body>
 </html>

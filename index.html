@@ -483,12 +483,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('label').forEach(label => label.style.color = 'brown');
     body.style.backgroundColor = 'beige';
 
-   
-    comment.style.backgroundColor = 'rgba(255, 231, 205, 1)';
-    comment.style.color = '#333';
-    comment.style.border = '1px solid rgba(255, 192, 203, 0.6)';
-  
-    small.style.color = 'grey';
+    commentBoxes.forEach(comment => {
+      comment.style.backgroundColor = 'rgba(255, 231, 205, 1)';
+      comment.style.color = '#333';
+      comment.style.border = '1px solid rgba(255, 192, 203, 0.6)';
+    });
+
+    document.querySelectorAll('.comment small').forEach(small => {
+      small.style.color = 'grey';
+    });
    
 
     updateButtonStyles(submitButton, '#ffb6c1', '#ff9a9e', '#e6788e', 'black');
@@ -517,14 +520,15 @@ document.addEventListener('DOMContentLoaded', () => {
     label.style.color = '#225F5F';
     body.style.backgroundColor = '#C3E6C5';
 
- 
+  commentBoxes.forEach(comment => {
       comment.style.backgroundColor = '#B0F0EC';
       comment.style.color = '#225F5F';
       comment.style.border = '2px solid #4CB6B6';
-  
+    });
 
- 
+    document.querySelectorAll('.comment small').forEach(small => {
       small.style.color = '#447F7F';
+    });
     
 
     updateButtonStyles(submitButton, '#4CB6B6', '#38A3A3', '#2D8787', 'white');

@@ -447,9 +447,9 @@ if (match) {
 const modeToggleButton = document.getElementById('mode-toggle');
 const header = document.querySelector('h1');
 const body = document.body;
-const commentBoxes = document.querySelectorAll('.comment');
-const submitButton = document.querySelector('.submit-button');
-const homeButton = document.querySelector('.home-btn');
+const commentBoxes = document.querySelectorAll('comment');
+const submitButton = document.querySelector('submit-button');
+const homeButton = document.querySelector('home-btn');
 
 let isDeerMode = true;
 
@@ -466,7 +466,7 @@ modeToggleButton.addEventListener('click', () => {
 
 function switchToCatMode() {
 
-  modeToggleButton.textContent = 'Mode: 🦌';
+  modeToggleButton.textContent = 'Mode: 🐈';
   
 
   header.style.color = '#ffe7cd';
@@ -499,7 +499,7 @@ function switchToCatMode() {
 }
 
 function switchToDeerMode() {
-  modeToggleButton.textContent = 'Mode: 🐈';
+  modeToggleButton.textContent = 'Mode: 🦌';
 
 
   header.style.color = '#ffffff';

@@ -462,6 +462,11 @@ function switchCommentColors() {
   document.head.insertAdjacentHTML(
     'beforeend',
     `<style>
+    
+    .header-container img {
+      content: url('cat.png'); 
+    }
+    
       .comment {
         background-color: rgba(255, 231, 205, 1);
         color: #333;
@@ -551,6 +556,10 @@ function switchToDeerMode() {
 	document.head.insertAdjacentHTML(
     'beforeend',
     `<style>
+
+    .header-container img {
+      content: url('deer.png'); 
+    }
 
   body {
   background-color: #C3E6C5;

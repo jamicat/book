@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>>Deerbook</title>
+  <title>>Catbook</title>
   <style>
     @font-face {
       font-family: 'hack-regular';
@@ -58,11 +58,11 @@
   border-radius: 50%;
 }
 
-   body {
+body {
   font-family: 'Courier New', monospace;
   margin: 0;
   padding: 0;
-  background-color: #C3E6C5;
+  background-color: beige;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,24 +73,23 @@ h1 {
   text-align: center;
   margin-top: 20px;
   font-size: 4.3em;
-  color: #ffffff; 
   font-family: 'nunito', sans-serif;
+  color: #ffe7cd;
   text-shadow: 
-    -1.5px -1.5px 0 #77D9D7, 
-    1.5px -1.5px 0 #77D9D7, 
-    -1.5px 1.5px 0 #77D9D7, 
-    1.5px 1.5px 0 #77D9D7; 
-}
+  -1.5px -1.5px 0 #FFB6C1CC, 
+   1.5px -1.5px 0 #FFB6C1CC, 
+  -1.5px 1.5px 0 #FFB6C1CC, 
+   1.5px 1.5px 0 #FFB6C1CC;
 
 h1 span {
-  color: #77D9D7; 
+  color: pink; 
 }
 
 label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #225F5F;
+  color: black;
   font-family: 'nunito', sans-serif; 
   font-size: 0.9em;
 }
@@ -100,7 +99,7 @@ label {
   width: 92%;
   max-width: 640px;
   padding: 15px;
-  background: #B0F0EC; 
+  background: rgba(255, 231, 205, 1); 
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -110,11 +109,11 @@ label {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 2px solid #4CB6B6; 
+  border: 2px solid rgba(255, 192, 203, 0.6); 
   border-radius: 5px;
   font-size: 1em;
-  background: #E2FAF8; 
-  color: #225F5F; 
+  background: #fffbf5; 
+  color: #333; 
   box-sizing: border-box;
 }
 
@@ -148,12 +147,12 @@ label {
 }
 
 .comment {
-  background-color: #B0F0EC; 
-  color: #225F5F; 
+  background-color: rgba(255, 231, 205, 1); 
+  color: #333; 
   padding: 20px;
   margin-bottom: 15px;
   border-radius: 10px;
-  border: 2px solid #4CB6B6;
+  border: 2px solid rgba(255, 192, 203, 0.6);
   font-family: 'Arial', sans-serif;
   font-size: 0.9rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -169,21 +168,21 @@ label {
 
 .comment h4 {
   margin: 0 0 5px;
-  color: #155E5E;
+  color: black;
 }
 
 .comment small {
   display: block;
   margin-top: 5px;
-  color: #447F7F;
+  color: grey;
 }
 
 .submit-button {
   display: block;
   margin: 20px auto;
-  background-color: #4CB6B6;
+  background-color: #ffb6c1;
   transition: background-color 0.3s, transform 0.2s;
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -193,21 +192,21 @@ label {
 }
 
 .submit-button:hover {
-  background-color: #38A3A3;
+  background-color: #ff9a9e;
   transform: scale(1.05);
 }
 
 .submit-button:active {
-  background-color: #2D8787;
+  background-color: #e6788e;
   transform: scale(0.95);
 }
 
 .home-btn {
   display: block;
   margin: 20px auto;
-  background-color: #4CB6B6;
+  background-color: #ffb6c1;
   transition: background-color 0.3s, transform 0.2s;
-  color: white;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -217,12 +216,12 @@ label {
 }
 
 .home-btn:hover {
-  background-color: #38A3A3;
+  background-color: #ff9a9e;
   transform: scale(1.05);
 }
 
 .home-btn:active {
-  background-color: #2D8787;
+  background-color: #e6788e;
   transform: scale(0.95);
 }
 
@@ -233,7 +232,7 @@ label {
   
 <body>
  <div class="header-container">
-  <img src="deer.png" alt="Deer Fursona">
+  <img src="cat.png" alt="Deer Fursona">
   <h1>Guestbook</h1>
 </div>
 
@@ -284,7 +283,7 @@ label {
   cursor: pointer;
   font-size: 1em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-">Mode: 🦌</button>
+">Mode: 🐈</button>
 
   <script>
     const form = document.getElementById('guestbook-form');
@@ -437,7 +436,7 @@ if (match) {
   }, 500);
 	  
 const modeToggleButton = document.getElementById('mode-toggle');
-let isDeer = true; 
+let isDeer = false; 
 
 modeToggleButton.addEventListener('click', () => {
   if (!isDeer) {

@@ -534,7 +534,7 @@ function switchCommentColors() {
   box-sizing: border-box;
 }
 
-mode-toggle {
+#mode-toggle {
 background-color: #ffb6c1;
 color: black;
 }
@@ -542,13 +542,14 @@ color: black;
     </style>`
   );
 
-  document.title = 'Catbook';
+  document.title = '>Catbook';
   modeToggleButton.textContent = 'Mode: 🐈';
 }
 
 function switchToDeerMode() {
-  document.title = 'Deerbook';
+  document.title = '>Deerbook';
   modeToggleButton.textContent = 'Mode: 🦌';
+
   //deer style
 }
 

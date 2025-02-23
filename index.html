@@ -538,23 +538,24 @@ background-color: rgba(255, 231, 205, 1);
   box-sizing: border-box;
 }
 
-#mode-toggle {
-background-color: #ffb6c1;
-color: black;
-}
 
     </style>`
   );
 
   document.title = '>Catbook';
   modeToggleButton.textContent = 'Mode: 🐈';
+  modeToggleButton.style.backgroundColor = '#ffb6c1';
+  modeToggleButton.style.color = 'black';
 }
 
 function switchToDeerMode() {
   document.title = '>Deerbook';
   modeToggleButton.textContent = 'Mode: 🦌';
+  modeToggleButton.style.backgroundColor = '#4CB6B6';
+  modeToggleButton.style.color = 'white';
 
   //deer style
+	
 }
 
 

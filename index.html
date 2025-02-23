@@ -532,10 +532,8 @@ background-color: rgba(255, 231, 205, 1);
 .form-container textarea {
   border: 2px solid rgba(255, 192, 203, 0.6); 
   border-radius: 5px;
-  font-size: 1em;
   background: #fffbf5; 
   color: #333; 
-  box-sizing: border-box;
 }
 
 
@@ -549,12 +547,95 @@ background-color: rgba(255, 231, 205, 1);
 }
 
 function switchToDeerMode() {
+
+	document.head.insertAdjacentHTML(
+    'beforeend',
+    `<style>
+
+  body {
+  background-color: #C3E6C5;
+}
+
+
+h1 {
+  color: #ffffff; 
+  text-shadow: 
+    -2px -2px 0 #77D9D7, 
+    2px -2px 0 #77D9D7, 
+    -2px 2px 0 #77D9D7, 
+    2px 2px 0 #77D9D7; 
+}
+
+h1 span {
+  color: #77D9D7; 
+}
+
+label {
+  color: #225F5F;
+}
+
+.form-container {
+  background: #B0F0EC; 
+}
+
+.form-container input,
+.form-container textarea {
+  border: 2px solid #4CB6B6; 
+  background: #E2FAF8; 
+  color: #225F5F; 
+}
+
+
+.comment {
+  background-color: #B0F0EC; 
+  color: #225F5F; 
+  border: 2px solid #4CB6B6;
+}
+
+
+.comment h4 {
+  color: #155E5E;
+}
+
+.comment small {
+  color: #447F7F;
+}
+
+.submit-button {
+  background-color: #4CB6B6;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #38A3A3;
+}
+
+.submit-button:active {
+  background-color: #2D8787;
+}
+
+.home-btn {
+
+  background-color: #4CB6B6;
+  color: white;
+}
+
+.home-btn:hover {
+  background-color: #38A3A3;
+}
+
+.home-btn:active {
+  background-color: #2D8787;
+}
+     
+
+    </style>`
+		
+  );
   document.title = '>Deerbook';
   modeToggleButton.textContent = 'Mode: 🦌';
   modeToggleButton.style.backgroundColor = '#4CB6B6';
   modeToggleButton.style.color = 'white';
-
-  //deer style
 	
 }
 

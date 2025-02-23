@@ -272,6 +272,19 @@ label {
 
   <div class="comments-section" id="comments-section"></div>
 
+<button id="mode-toggle" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CB6B6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+">Mode: 🦌</button>
 
   <script>
     const form = document.getElementById('guestbook-form');
@@ -423,9 +436,107 @@ if (match) {
     loadComments();
   }, 500);
 
+
+
+
+
+
+
+
+	  
+	  
+const modeToggleButton = document.getElementById('mode-toggle');
+let isDeer = true; 
+
+modeToggleButton.addEventListener('click', () => {
+  if (!isDeer) {
+    switchCommentColors();
+  } else {
+    switchToDeerMode();
+  }
+
+  isDeer = !isDeer; 
+});
+
+function switchCommentColors() {
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    `<style>
+      .comment {
+        background-color: rgba(255, 231, 205, 1);
+        color: #333;
+        border: 1px solid rgba(255, 192, 203, 0.6);
+      }
+
+      .comment small {
+        color: grey;
+      }
+
+      h1 {
+        color: #ffe7cd;
+        text-shadow: 
+          -1px -1px 0 #FFB6C1CC, 
+           1px -1px 0 #FFB6C1CC, 
+          -1px 1px 0 #FFB6C1CC, 
+           1px 1px 0 #FFB6C1CC;
+      }
+
+      h1 span {
+        color: pink;
+      }
+
+      label {
+        color: brown;
+      }
+
+      body {
+        background-color: beige;
+      }
+
+      .submit-button {
+        background-color: #ffb6c1;
+        color: black;
+      }
+
+      .submit-button:hover {
+        background-color: #ff9a9e;
+      }
+
+      .submit-button:active {
+        background-color: #e6788e;
+      }
+
+      .home-btn {
+        background-color: #ffb6c1;
+        color: black;
+      }
+
+      .home-btn:hover {
+        background-color: #ff9a9e;
+      }
+
+      .home-btn:active {
+        background-color: #e6788e;
+      }
+    </style>`
+  );
+
+  document.title = 'Catbook';
+  modeToggleButton.textContent = 'Mode: 🐈';
+}
+
+function switchToDeerMode() {
+  document.title = 'Deerbook';
+  modeToggleButton.textContent = 'Mode: 🦌';
+  //deer style
+}
+
+
+
+
+
+	  
   
   </script>
-
-	
 </body>
 </html>

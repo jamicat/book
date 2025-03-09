@@ -638,5 +638,12 @@ label {
   modeToggleButton.style.color = 'white';
 }
   </script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.0"></script>
+<script>
+  document.getElementById('guestbook-form').addEventListener('submit', () => {
+    confetti();
+  });
+</script>
 </body>
 </html>

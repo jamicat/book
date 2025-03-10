@@ -1,642 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>>Catbook</title>
-  <style>
-    @font-face {
-      font-family: 'hack-regular';
-      src: url('hack-regular.ttf') format('truetype');
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jamie></title>
+<link rel="stylesheet" href="styles.css">
+<script src="three.r134.min.js"></script>
+<script src="vanta.net.min.js"></script>
+<style>
 
-    @font-face {
-      font-family: 'honeybee';
-      src: url('honeybee.ttf') format('truetype');
-    }
+@font-face {
+font-family: 'nunito';
+src: url('nunito.ttf') format('truetype');
+} 
 
-    @font-face {
-      font-family: 'nunito';
-      src: url('nunito.ttf') format('truetype');
-    }
-
-
-    @media (max-width: 1080px) and (max-height: 2400px) {
-    .species-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-      justify-content: center;
-      gap: 5px;
-    }
-    .form-container {
-    padding: 20px; 
-    }
-    }
-
-    @media (max-width: 1366px) and (max-height: 768px) { 
-    body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-	  }
-    }
-
-
- .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+html, body {
+height: 100%;
+margin: 0;
 }
 
-.header-container img {
-  height: 60px; 
-  margin-top: -30px;
-  border-radius: 50%;
+#draggable-container {
+position: absolute;
+cursor: grab;
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 40%
 }
 
 body {
-  font-family: 'Courier New', monospace;
-  margin: 0;
-  padding: 0;
-  background-color: beige;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+background: none;
+background: url('bg.jpg') no-repeat center center fixed;
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+height: 100vh;
+margin: 0;
+overflow: hidden; 
+user-select: none;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 4.3em;
-  font-family: 'nunito', sans-serif;
-  color: #ffe7cd;
-  text-shadow: 
-  -1.5px -1.5px 0 #FFB6C1CC, 
-   1.5px -1.5px 0 #FFB6C1CC, 
-  -1.5px 1.5px 0 #FFB6C1CC, 
-   1.5px 1.5px 0 #FFB6C1CC;
+
+.image-container {
+display: flex;
+justify-content: center;
+margin-bottom: 0px;
+user-select: none;
+}
+
+.image-container img {
+max-width: 170px;
+height: auto;
+user-select: none;
+}
+
+.terminal {
+font-size: 0.9em;
+background: rgba(0, 0, 0, 0.6); 
+backdrop-filter: blur(10px) saturate(150%);
+-webkit-backdrop-filter: blur(10px) saturate(150%);
+color: white;
+padding: 20px;
+border-radius: 10px;
+width: 80%;
+max-width: 600px;
+box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+margin-bottom: 70px;
+border: 2px solid rgba(255, 255, 255, 0.3);
+user-select: none;
+}
+
+.button {
+font-size: 0.9em;
+background-color: #ffb6c1;
+transition: background-color 0.3s, transform 0.2s;
+color: black;
+padding: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 5px;
+}
+
+.button2 {
+font-size: 0.9em;
+background-color: #ffe59a;
+transition: background-color 0.3s, transform 0.2s;
+color: black;
+padding: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 5px;
+}
+
+.button:hover {
+background-color: #ff9a9e; 
+transform: scale(1.05); 
+}
+.button:active{
+background-color: #e6788e; 
+transform: scale(0.95);  
+}
+
+.button2:hover {
+background-color: #ffe59a; 
+transform: scale(1.05); 
+}
+.button2:active{
+background-color: #e6788e; 
+transform: scale(0.95);  
+}
+
+
+.buttons {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin-top: 20px;
+flex-wrap: wrap;
+}
+
+.cursor {
+display: inline-block;
+width: 10px;
+height: 20px;
+background-color: white;
+margin-left: 5px;
+animation: blink 1s step-end infinite;
+box-shadow: 0 0 8px #8be9fd, 0 0 15px #8be9fd; 
+border-radius: 2px;
+}
+
+@keyframes blink {
+50% {
+opacity: 0;
+}
+}
+
+.dog {
+position: absolute;
+width: 100px;
+height: auto;
+z-index: 10;
+pointer-events: auto; 
+transition: transform 0.3s ease;
+user-select: none;
+}
+
+.dog-volume-container {
+position: absolute;
+bottom: 10px;
+right: 20px;
+}
+
+.play-volume-container {
+position: absolute;
+bottom: 14px;
+right: 160px;
+}
+
+.button.active {
+animation: toggleOn 0.5s infinite alternate;
+background-color: #e6788e; 
 
 }
 
-h1 span {
-  color: pink; 
-}
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: black;
-  font-family: 'nunito', sans-serif; 
-  font-size: 0.9em;
-}
-
-.form-container {
-  margin: 20px auto;
-  width: 92%;
-  max-width: 640px;
-  padding: 15px;
-  background: rgba(255, 231, 205, 1); 
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.form-container input,
-.form-container textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 2px solid rgba(255, 192, 203, 0.6); 
-  border-radius: 5px;
-  font-size: 1em;
-  background: #fffbf5; 
-  color: #333; 
-  box-sizing: border-box;
-}
-
-.form-container textarea {
-  resize: none;
-}
-
-.species-buttons {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 15px;
-}
-
-.species-buttons button {
-  font-size: 1.5rem;
-  border: none;
+.music-button {
+  font-size: 2.1em;
   background: none;
-  cursor: pointer;
-}
-
-.species-buttons button:hover {
-  flex: 1 1 auto;
-  transform: scale(1.2);
-}
-
-.comments-section {
-  margin: 20px auto;
-  width: 90%;
-  max-width: 600px;
-}
-
-.comment {
-  background-color: rgba(255, 231, 205, 1); 
-  color: #333; 
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 192, 203, 0.6);
-  font-family: 'Arial', sans-serif;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.comment iframe {
-  width: 100%; 
-  height: auto; 
-  aspect-ratio: 16 / 9; 
-  border-radius: 8px; 
-  max-width: 100%; 
-}
-
-.comment h4 {
-  margin: 0 0 5px;
-  color: black;
-}
-
-.comment small {
-  display: block;
-  margin-top: 5px;
-  color: grey;
-}
-
-.submit-button {
-  display: block;
-  margin: 20px auto;
-  background-color: #ffb6c1;
-  transition: background-color 0.3s, transform 0.2s;
-  color: black;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 0.8em;
-  font-family: 'nunito';
+  color: #ffb6c1; 
+  transition: transform 0.2s, color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+
 }
 
-.submit-button:hover {
-  background-color: #ff9a9e;
-  transform: scale(1.05);
+.music-button:hover {
+  color: #ff8ca0;
+  transform: scale(1.1);
 }
 
-.submit-button:active {
-  background-color: #e6788e;
+.music-button:active {
   transform: scale(0.95);
 }
 
-.home-btn {
-  display: block;
-  margin: 20px auto;
-  background-color: #ffb6c1;
-  transition: background-color 0.3s, transform 0.2s;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.8em;
-  font-family: 'nunito';
+.play-icon,
+.pause-icon {
+  font-weight: bold;
 }
-
-.home-btn:hover {
-  background-color: #ff9a9e;
-  transform: scale(1.05);
+@keyframes toggleOn {
+from {
+transform: scale(1);
 }
-
-.home-btn:active {
-  background-color: #e6788e;
-  transform: scale(0.95);
+to {
+transform: scale(1.1);
 }
-
-  </style>
+}
+</style>
 </head>
 
 
-  
 <body>
- <div class="header-container">
-  <img src="cat.png" alt="Deer Fursona">
-  <h1>Guestbook</h1>
+
+<div id="draggable-container">	
+<div class="image-container" style="position: relative;">
+<img src="fursona.png" alt="Fursona" class="fursona-image" style="display: block;">
+<div class="infText" id="mood-text" 
+style="background-color: #ffe59a; display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);">
+</div>
+</div>
+<div class="terminal" id="terminal">
+<div id="typing-area"></div>
+<div class="buttons" id="button-area" style="display: none;">
+<!-- 
+    <button class="button" onclick="showAbout()">About</button>
+	    -->
+<button class="button" onclick="showSocials()">Socials</button>
+<button class="button2" onclick="showArt()">Art</button>
+<button class="button" onclick="window.location.href='/book/'">Guestbook</button>
+<button class="button2" onclick="exitTerminal()">Exit</button>
+</div>
+</div>
 </div>
 
-  <div class="form-container">
-    <form id="guestbook-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required required placeholder="Anonymous">
 
-      <label for="comment">Comment:</label>
-      <textarea id="comment" name="comment" rows="4" maxlength="10000" required placeholder="Comments are public! Please be nice."></textarea>
-
-      <label for="question">Favourite food:</label>
-      <input type="text" id="question" name="question" placeholder="Optional">
-
-      <label for="species">Species:</label>
-      <div class="species-buttons" id="species-buttons">
-        <button type="button" data-species="🐱">🐱</button>
-        <button type="button" data-species="🐶">🐶</button>
-        <button type="button" data-species="🐺">🐺</button>
-        <button type="button" data-species="🦊">🦊</button>
-        <button type="button" data-species="🦁">🦁</button>
-        <button type="button" data-species="🐰">🐰</button>
-        <button type="button" data-species="🐮">🐮</button>
-        <button type="button" data-species="🦌">🦌</button>
-        <button type="button" data-species="🐐">🐐</button>
-        <button type="button" data-species="🦈">🦈</button>
-        <button type="button" data-species="🐉">🐉</button>
-        <button type="button" data-species="🦋">🦋</button>
-        <button type="button" data-species="❓">❓</button>
-      </div>
-
-      <button type="submit" class="submit-button">Submit</button>
-      <button class="home-btn" id="home-btn" onclick="window.location.href='/';">Home</button>
-    </form>
-  </div>
-
-  <div class="comments-section" id="comments-section"></div>
-
-<button id="mode-toggle" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #ffb6c1;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-family: 'nunito', sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-">Mode: 🐈</button>
-
-  <script>
-    const form = document.getElementById('guestbook-form');
-    const commentsSection = document.getElementById('comments-section');
-    const speciesButtons = document.querySelectorAll('#species-buttons button');
-    let selectedSpecies = '';
-
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycbx7bzct-SU2XZ0OgiSQhH76NGyh6oSHkngglBgWLd9-wr76G4uPvtjRw31DifL59iadtA/exec';
-
-    const cooldownPeriod = 5 * 60 * 1000;
-
-    speciesButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        selectedSpecies = button.dataset.species;
-        speciesButtons.forEach(btn => btn.style.opacity = '0.5');
-        button.style.opacity = '1';
-      });
-    });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const lastSubmissionTime = localStorage.getItem('lastSubmissionTime');
-      const now = Date.now();
-
-      if (lastSubmissionTime && now - lastSubmissionTime < cooldownPeriod) {
-        alert('5 minutes between each comment, please!');
-        return;
-      }
-
-      const name = document.getElementById('name').value.trim();
-      const commentText = document.getElementById('comment').value.trim();
-      const question = document.getElementById('question').value.trim() || null;
+<div class="play-volume-container">
+<button id="music-toggle-button" class="music-button">
+  <span class="play-icon">▶</span>
+  <span class="pause-icon" style="display: none;">❚❚</span>
+</button>
+</div>
+<div class="dog-volume-container">
+<button id="toggle-dog-button" class="button" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);">Dog Audio: OFF</button>
+</div>
 
 
-      if (!name || !commentText) {
-        alert('Name and comment cannot be empty!');
-        return;
-      }
 
-      const data = {
-        name,
-        species: selectedSpecies || '❓',
-        comment: commentText,
-        question,
-      };
+<audio id="music-audio" src="fromadream.mp3" loop></audio>
+<img src="dog.png" class="dog" id="dog" alt="Dog" draggable="false">
+<audio id="dog-audio" src="dog-bark.mp3" loop></audio>
 
-      fetch(webAppUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
 
-      localStorage.setItem('lastSubmissionTime', now);
 
-      form.reset();
-      selectedSpecies = '';
-      speciesButtons.forEach(btn => btn.style.opacity = '1');
-      loadComments();
-    });
+<div id="weather-container" class="infText">
+Brit weather: <span id="weather-output"></span>
+</div>
 
-    async function loadComments() {
-  try {
-    const response = await fetch(webAppUrl);
-    if (!response.ok) throw new Error('Failed to load comments.');
 
-    
-    const { comments = [], questions = [] } = await response.json();
-    console.log('Fetched comments and questions:', { comments, questions });
-
-    commentsSection.innerHTML = '';
-    comments
-      .slice() 
-      .reverse() 
-      .forEach(({ timestamp, name, species, comment }) => {
-        const questionData = questions.find(q => {
-        const commentTimestamp = new Date(timestamp).toISOString().slice(0, 19); 
-        const questionTimestamp = new Date(q.timestamp).toISOString().slice(0, 19); 
-        return (
-    q.name.trim().toLowerCase() === name.trim().toLowerCase() &&
-    commentTimestamp === questionTimestamp
-  );
+<!--script>
+const fursonaImage = document.querySelector('.fursona-image');
+const moodText = document.getElementById('mood-text');
+fursonaImage.addEventListener('mouseover', () => {
+moodText.style.display = 'block'; 
 });
-        const questionText = questionData ? questionData.question : null;
+fursonaImage.addEventListener('mouseout', () => {
+moodText.style.display = 'none'; 
+});
+</script-->
 
-        const commentEl = document.createElement('div');
-        commentEl.classList.add('comment');
 
-        const nameEl = document.createElement('h4');
-        nameEl.textContent = `${species || '❓'} ${name || 'Anonymous'}`;
-        commentEl.appendChild(nameEl);
-
-         
-const textEl = document.createElement('p');
-const ytRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/g;
-const match = comment.match(ytRegex);
-if (match) {
-  const videoId = match[0].split("v=")[1]?.split("&")[0] || match[0].split("/").pop().split("?")[0];
-  const iframe = document.createElement('iframe');
-  iframe.width = "100%"; 
-  iframe.height = "315";
-  iframe.src = `https://www.youtube.com/embed/${videoId}`;
-  iframe.frameBorder = "0";
-  iframe.allowFullscreen = true;
-  iframe.style.borderRadius = "8px"; 
-  const filteredComment = comment.replace(ytRegex, "").trim();
-  if (filteredComment) {
-    textEl.textContent = filteredComment;
-    commentEl.appendChild(textEl);
-  }
-  commentEl.appendChild(iframe);
-} else {
-  textEl.textContent = comment || 'No comment provided.';
-  commentEl.appendChild(textEl);
+<script>
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=53.765762&lon=-2.692337&appid=3b394dfa0c0a624d5b6d72af1bef9a64";
+fetch(apiUrl)
+.then(response => {
+if (!response.ok) {
+throw new Error("Network response not ok");
 }
+return response.json();
+})
+.then(data => {
+const description = data.weather[0].description;
+const formattedDescription = description.charAt(0).toUpperCase() + description.slice(1);
 
+document.getElementById("weather-output").textContent = formattedDescription;
+})
+.catch(error => {
+console.error("Error fetching weather:", error);
+document.getElementById("weather-output").textContent = "unable to fetch.";
+});
 
+const musicToggleButton = document.getElementById("music-toggle-button");
+const musicAudio = document.getElementById("music-audio");
+const playIcon = document.querySelector(".play-icon");
+const pauseIcon = document.querySelector(".pause-icon");
 
-        
-       if (questionText) {
-  const questionEl = document.createElement('p');
-  questionEl.textContent = `Favourite food: ${questionText}`;
-  commentEl.appendChild(questionEl);
-}
+musicAudio.volume = 0.9;
 
-        const dateEl = document.createElement('small');
-        dateEl.textContent = timestamp ? formatDate(timestamp) : 'Invalid Date';
-        commentEl.appendChild(dateEl);
-
-        commentsSection.appendChild(commentEl);
-      });
-  } catch (error) {
-    console.error('Error loading comments:', error.message);
-    commentsSection.innerHTML = '<p>Failed to load comments. Please try again later.</p>';
-  }
-}
-
-    function formatDate(timestamp) {
-      if (timestamp.includes('/')) return timestamp;
-      const date = new Date(timestamp);
-      if (isNaN(date)) return 'Invalid Date';
-      return `${date.getDate().toString().padStart(2, '0')}/${
-        (date.getMonth() + 1).toString().padStart(2, '0')
-      }/${date.getFullYear()}, ${date.toLocaleTimeString()} `;
-    }
-
-  setTimeout(() => {
-    loadComments();
-  }, 500);
-	  
-const modeToggleButton = document.getElementById('mode-toggle');
-
-	  
-let isDeer = true; 
-modeToggleButton.addEventListener('click', () => {
-  if (!isDeer) {
-    switchCommentColors();
+musicToggleButton.addEventListener("click", () => {
+  if (musicAudio.paused) {
+    musicAudio.play();
+    playIcon.style.display = "none";
+    pauseIcon.style.display = "flex";
   } else {
-    switchToDeerMode();
+    musicAudio.pause();
+    playIcon.style.display = "flex";
+    pauseIcon.style.display = "none";
   }
+});
+</script>
 
-  isDeer = !isDeer; 
+
+
+
+
+<script>
+
+const terminal = document.getElementById('terminal');
+const typingArea = document.getElementById('typing-area');
+const buttonArea = document.getElementById('button-area');
+const dog = document.getElementById('dog');
+const dogAudio = document.getElementById('dog-audio');
+const dogImage = document.getElementById('dog');
+const toggleDogButton = document.getElementById('toggle-dog-button');
+let growInterval;
+let scale = 1; 
+
+const messages = [
+'Select your options below!'
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+let typingSpeed = 30;
+let slowEllipsesSpeed = 900;
+let hasCleared = false;
+let dogVolumeEnabled = false;
+
+
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+let dogX = Math.random() * screenWidth * 0.8; 
+let dogY = Math.random() * screenHeight * 0.8;
+let dogDX = 1; //dog speed
+let dogDY = 1; 
+
+//MOVE DOG
+function moveDog() {
+dogX += dogDX;
+dogY += dogDY;
+
+if (dogX <= 0 || dogX + dog.offsetWidth >= screenWidth) {
+dogDX *= -1; //DOG EVADE
+}
+if (dogY <= 0 || dogY + dog.offsetHeight >= screenHeight) {
+dogDY *= -1; //DOG EVADE AGAIN!!!
+}
+
+dog.style.left = `${dogX}px`;
+dog.style.top = `${dogY}px`;
+//KEEP MOVING
+requestAnimationFrame(moveDog);
+}
+
+dog.style.position = 'absolute';
+dog.style.left = `${dogX}px`;
+dog.style.top = `${dogY}px`;
+moveDog();
+
+//grow
+dogImage.style.pointerEvents = 'auto';
+dogImage.addEventListener('mouseover', () => {
+clearInterval(growInterval); 
+growInterval = setInterval(() => {
+scale += 0.01; 
+dogImage.style.transform = `scale(${scale})`;
+}, 50); 
 });
 
-function switchCommentColors() {
-  document.head.insertAdjacentHTML(
-    'beforeend',
-    `<style>
-    
-    .header-container img {
-      content: url('cat.png'); 
+
+//pause/shrink
+dogImage.addEventListener('mouseout', () => {
+clearInterval(growInterval); 
+/*	 
+ scale = 1; 
+ dogImage.style.transform = `scale(${scale})`; 
+ */
+});
+
+
+
+// dog loud/quiet
+document.addEventListener('mousemove', (event) => {
+if (!dogVolumeEnabled) return;
+
+const cursorX = event.clientX;
+const cursorY = event.clientY;
+
+const dogRect = dog.getBoundingClientRect();
+const dogCenterX = dogRect.left + dogRect.width / 2;
+const dogCenterY = dogRect.top + dogRect.height / 2;
+
+const distance = Math.sqrt(
+Math.pow(cursorX - dogCenterX, 2) + Math.pow(cursorY - dogCenterY, 2)
+);
+
+const maxDistance = 500;
+const volume = Math.max(0, 1 - distance / maxDistance) * 0.4; 
+dogAudio.volume = volume;
+});
+
+toggleDogButton.addEventListener('click', () => {
+dogVolumeEnabled = !dogVolumeEnabled;
+
+if (dogVolumeEnabled) {
+dogAudio.play();
+toggleDogButton.classList.add('active');
+toggleDogButton.textContent = 'Dog Audio: ON';
+} else {
+dogAudio.pause();
+dogAudio.currentTime = 0;
+toggleDogButton.classList.remove('active');
+toggleDogButton.textContent = 'Dog Audio: OFF';
+}
+});
+
+function type() {
+if (lineIndex < messages.length) {
+const currentLine = messages[lineIndex];
+if (charIndex < currentLine.length) {
+typingArea.innerHTML += currentLine[charIndex];
+charIndex++;
+setTimeout(type, typingSpeed);
+} else {
+if (lineIndex === 0 && !hasCleared) {
+/*typingArea.innerHTML = '';*/
+hasCleared = true;
+charIndex = 0;
+lineIndex++;
+setTimeout(type, typingSpeed);
+
+} else {
+typingArea.innerHTML += '<br>';
+charIndex = 0;
+lineIndex++;
+setTimeout(type, typingSpeed);
+}
+}
+} else {
+showCursor();         
+setTimeout(() => {
+buttonArea.style.display = 'flex';
+}, 500); 
+}
+}
+
+
+
+/*
+  function typeEllipses(callback) {
+    let dots = 0;
+    const ellipsisInterval = setInterval(() => {
+      if (dots < 3) {
+        typingArea.innerHTML += '.';
+        dots++;
+      } else {
+        clearInterval(ellipsisInterval);
+        if (callback) {
+          typingSpeed = 30;
+          callback();
+        }
+      }
+    }, slowEllipsesSpeed);
+  }*/
+
+function showCursor() {
+typingArea.innerHTML += '<div class="cursor"></div>';
+}
+
+function removeCursorAndShowButtons() {
+const cursor = document.querySelector('.cursor');
+if (cursor) cursor.remove();
+buttonArea.style.display = 'flex';
+}
+
+/*
+  function showAbout() {
+    const aboutMessage = [
+      `Welcome to the tea terminal! This is a silly website I made for fun.`,
+      ` `,
+      `My human-feline name is Jamie and as you may have discerned, I love bubble tea, IT, am British and fond of my pets. I very recently befriended (kidnapped) two blue guppies and they fill me with unconditional love. My family has always kept bearded collies as pets (the one trying to escape your screen—she will do it), so love was a big part of my upbringing. As a fairly sensitive person, I always find myself feeling grateful for the smallest things, as they help me put much bigger challenges into a healthy perspective.`,
+      ` `,
+      `I believe that we should strive to give as much unconditional love as our animal companions are capable of. One day when I have escaped IT, I would really love to volunteer at an animal sanctuary or rescue foundation.`,
+      ` `,
+      `When not touching grass or drinking it in milk, I like to engage with online gaming communities in a carefree way, and to coax and encourage my friends to exist as free spirits too. Games like Team Fortress 2, Final Fantasy online and even more stressful competitors like Dead by Daylight are super enjoyable to me for this reason. It is important for me to feel a part of something bigger than myself.`,
+      ` `,
+	`My biggest hobby outside of IT is to read. I come from a family of hungry bookworms, each with our own individual section in the family library at home, always battling for space. Reading in bed, or when I have nothing else to do, is incredibly therapeutic. It provides me with a natural sense of compartmentalisation. Absorbing other people's written experiences feels like a real superpower—one I wish the world wouldn't neglect. I'll list my favourite books in an upcoming FAQ page!`,
+	` `,
+      `This may read like a brainfart—and that is because it probably was. You can expect weekly updates here as the mood shifts, as well as more typical terminal tweaks (TTTs in IT) and wholesome featurettes. Thank you for checking out this website, may our paths cross one day! In the meantime, feel free to leave your mark in the guestbook (I know, I am trying to fix it ;-;).`
+    ];
+
+    buttonArea.style.display = 'none';
+    typingArea.innerHTML = '';
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeAbout() {
+      if (lineIndex < aboutMessage.length) {
+        const currentLine = aboutMessage[lineIndex];
+
+        if (charIndex < currentLine.length) {
+          typingArea.innerHTML += currentLine[charIndex];
+          charIndex++;
+          setTimeout(typeAbout, 10);
+        } else {
+          typingArea.innerHTML += '<br>';
+          charIndex = 0;
+          lineIndex++;
+          setTimeout(typeAbout, 10);
+        }
+      } else {
+        showCursor();
+        setTimeout(removeCursorAndShowButtons, 1000);
+      }
     }
-    
-      .comment {
-        background-color: rgba(255, 231, 205, 1);
-        color: #333;
-        border: 2px solid rgba(255, 192, 203, 0.6);
-      }
 
-      .comment small {
-        color: grey;
-      }
+    typeAbout();
+  }
+  */
 
-      .comment h4 {
-        color: black;
+function showSocials() {
+const socials = [
+'Discord - jamgang',
+'',
+'Steam - jamigang',
+'',
+'Bsky - jamjme.bsky.social',
+''
+];
 
-      }
+buttonArea.style.display = 'none';
+typingArea.innerHTML = '';
 
-      h1 {
-        color: #ffe7cd;
-        text-shadow: 
-          -1.5px -1.5px 0 #FFB6C1CC, 
-           1.5px -1.5px 0 #FFB6C1CC, 
-          -1.5px 1.5px 0 #FFB6C1CC, 
-           1.5px 1.5px 0 #FFB6C1CC;
-      }
+let socialIndex = 0;
+let charIndex = 0;
 
-      h1 span {
-        color: pink;
-      }
-
-      label {
-        color: black;
-      }
-
-      body {
-        background-color: beige;
-      }
-
-      .submit-button {
-        background-color: #ffb6c1;
-        color: black;
-      }
-
-      .submit-button:hover {
-        background-color: #ff9a9e;
-      }
-
-      .submit-button:active {
-        background-color: #e6788e;
-      }
-
-      .home-btn {
-        background-color: #ffb6c1;
-        color: black;
-      }
-
-      .home-btn:hover {
-        background-color: #ff9a9e;
-      }
-
-      .home-btn:active {
-        background-color: #e6788e;
-      }
-
-.form-container{
-background-color: rgba(255, 231, 205, 1);
+function typeSocial() {
+if (socialIndex < socials.length) {
+if (charIndex < socials[socialIndex].length) {
+typingArea.innerHTML += socials[socialIndex][charIndex];
+charIndex++;
+setTimeout(typeSocial, typingSpeed);
+} else {
+typingArea.innerHTML += '<br>';
+charIndex = 0;
+socialIndex++;
+setTimeout(typeSocial, typingSpeed);
+}
+} else {
+showCursor();
+setTimeout(removeCursorAndShowButtons, 1000); 
+}
 }
 
-.form-container input,
-.form-container textarea {
-  border: 2px solid rgba(255, 192, 203, 0.6); 
-  border-radius: 5px;
-  background: #fffbf5; 
-  color: #333; 
+typeSocial();
+
 }
 
+function exitTerminal() {
+typingArea.innerHTML = '';
+const exitMessage = 'Follow the beige cat...';
+let index = 0;
 
-    </style>`
-  );
+buttonArea.style.display = 'none';
 
-  document.title = '>Catbook';
-  modeToggleButton.textContent = 'Mode: 🐈';
-  modeToggleButton.style.backgroundColor = '#ffb6c1';
-  modeToggleButton.style.color = 'black';
+function typeExitMessage() {
+if (index < exitMessage.length) {
+typingArea.innerHTML += exitMessage[index];
+index++;
+setTimeout(typeExitMessage, typingSpeed);
+} else {
+showCursor();
+setTimeout(() => {
+alert('You need to close this tab manually.');
+}, 1000);
+}
 }
 
-function switchToDeerMode() {
+typeExitMessage();
+}
 
-	document.head.insertAdjacentHTML(
-    'beforeend',
-    `<style>
+function showArt() {
+buttonArea.style.display = 'none'; 
+typingArea.innerHTML = ''; 
 
-    .header-container img {
-      content: url('deer.png'); 
+const artFiles = [
+'Jamie in Tokyo',
+'Blue Jamie',
+'Album Cover Jamie',
+'Sketchpage',
+'Chibi',
+];
+
+// dedicated intro because fucky event listeners
+const introElement = document.createElement('div');
+introElement.innerHTML = "<br>Jamie is a vivacious chatterbox cat, purring with energy. He's usually dressed in loose, cropped or oversized clothes, with tie-dyed patterns or soft pastel colours that blend seamlessly with his fur. Here is the current collection! The most recent commission was Jamie in Tokyo. His hair has been redyed, and I plan to keep the change going forwards. He is designed to mirror my real-life fashion choices and tastes! :D<br>";
+typingArea.appendChild(introElement); 
+
+function displayTree() {
+let treeHTML = '<br>art<br>';
+artFiles.forEach((art) => {
+treeHTML += `├── <span class="art-link" style="color: lightblue; cursor: pointer;" data-file="${art}">${art}</span><br>`;
+});
+
+const treeElement = document.createElement('div'); 
+treeElement.innerHTML = treeHTML; 
+typingArea.appendChild(treeElement); 
+
+addArtClickEvents(); 
+buttonArea.style.display = 'flex'; 
+}
+
+function addArtClickEvents() {
+const links = document.querySelectorAll('.art-link');
+links.forEach((link) => {
+link.addEventListener('click', () => {
+const filename = `${link.getAttribute('data-file').replace(/\s+/g, '-')}.png`;
+displayArt(filename);
+});
+});
+}
+
+function displayArt(filename) {
+typingArea.innerHTML = ''; 
+const imageElement = document.createElement('img');
+imageElement.src = filename;
+imageElement.alt = filename;
+imageElement.style = 'max-width:80%; height:auto; display:block; margin: 10px auto;';
+typingArea.appendChild(imageElement); 
+
+const introElementClone = introElement.cloneNode(true); 
+typingArea.appendChild(introElementClone); 
+
+displayTree(); 
+}
+
+displayTree(); 
+}
+
+type();	
+
+	
+
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("draggable-container");
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    container.addEventListener("mousedown", (event) => {
+        isDragging = true;
+        offsetX = event.clientX - container.getBoundingClientRect().left;
+        offsetY = event.clientY - container.getBoundingClientRect().top;
+        container.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (event) => {
+        if (!isDragging) return;
+
+        const newX = event.clientX - offsetX;
+        const newY = event.clientY - offsetY;
+
+        container.style.left = `${newX}px`;
+        container.style.top = `${newY}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+        container.style.cursor = "grab";
+    });
+});
+	
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const messages = [
+        "beans onn toaszt",
+	"need more boba...",
+        "feeling sleepy...",
+        "what are you looking at?",
+	"meow indeed...",
+	"toaszt onn beans",
+	"zzzZZzZzzZZZZZZzzzzzzzzzZzzzzzz",
+	"skibidistepped into my zone",
+	"the catrix has you...",
+	"the tea is ready..."
+    ];
+
+    const moodText = document.getElementById("mood-text");
+    let messageIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const baseTypingSpeed = 150; 
+    const deleteSpeed = 75; 
+    const pauseBetween = 4700; 
+    const pauseBeforeTyping = 1200; 
+
+    function typeEffect() {
+        const currentMessage = messages[messageIndex];
+        if (!isDeleting) {
+            moodText.innerText = currentMessage.substring(0, charIndex + 1);
+            charIndex++;
+
+            if (charIndex === currentMessage.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, pauseBetween); 
+                return;
+            }
+        } else {
+            moodText.innerText = currentMessage.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                isDeleting = false;
+                messageIndex = (messageIndex + 1) % messages.length; 
+                setTimeout(typeEffect, pauseBeforeTyping); 
+                return;
+            }
+        }
+        let randomPause = Math.random() < 0.15 ? 250 : 0;
+        let speed = isDeleting ? deleteSpeed : baseTypingSpeed + randomPause;
+        setTimeout(typeEffect, speed);
     }
-
-  body {
-  background-color: #C3E6C5;
-}
-
-
-h1 {
-  color: #ffffff; 
-  text-shadow: 
-    -1.5px -1.5px 0 #77D9D7, 
-    1.5px -1.5px 0 #77D9D7, 
-    -1.5px 1.5px 0 #77D9D7, 
-    1.5px 1.5px 0 #77D9D7; 
-}
-
-h1 span {
-  color: #77D9D7; 
-}
-
-label {
-  color: #225F5F;
-}
-
-.form-container {
-  background: #B0F0EC; 
-}
-
-.form-container input,
-.form-container textarea {
-  border: 2px solid #4CB6B6; 
-  background: #E2FAF8; 
-  color: #225F5F; 
-}
+    setTimeout(() => {
+        moodText.style.display = "block"; 
+        moodText.innerText = ""; 
+        typeEffect();
+    }, 500);
+});
 
 
-.comment {
-  background-color: #B0F0EC; 
-  color: #225F5F; 
-  border: 2px solid #4CB6B6;
-}
-
-
-.comment h4 {
-  color: #155E5E;
-}
-
-.comment small {
-  color: #447F7F;
-}
-
-.submit-button {
-  background-color: #4CB6B6;
-  color: white;
-}
-
-.submit-button:hover {
-  background-color: #38A3A3;
-}
-
-.submit-button:active {
-  background-color: #2D8787;
-}
-
-.home-btn {
-
-  background-color: #4CB6B6;
-  color: white;
-}
-
-.home-btn:hover {
-  background-color: #38A3A3;
-}
-
-.home-btn:active {
-  background-color: #2D8787;
-}
-    </style>`
-		
-  );
-  document.title = '>Deerbook';
-  modeToggleButton.textContent = 'Mode: 🦌';
-  modeToggleButton.style.backgroundColor = '#4CB6B6';
-  modeToggleButton.style.color = 'white';
-}
-  </script>
+</script>
 </body>
 </html>

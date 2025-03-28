@@ -6,6 +6,23 @@
   <title>>Catbook</title>
 	
   <style>  
+
+
+ .video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 80%;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
+  border-radius: 15px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
 	  
     @font-face {
       font-family: 'hack-regular';
@@ -239,7 +256,7 @@ label {
 </div>
 
 	
-  <div class="form-container">
+  <!--div class="form-container">
     <form id="guestbook-form">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required required placeholder="Anonymous">
@@ -269,7 +286,15 @@ label {
 
      <button type="submit" class="submit-button">Submit</button-->
       
-	
+<div class="video-container">
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/v97FPN2US2o" 
+    frameborder="0" 
+    allowfullscreen>
+  </iframe>
+</div>
 
      <button class="home-btn" id="home-btn" onclick="window.location.href='/';">Home</button>
    </form>
